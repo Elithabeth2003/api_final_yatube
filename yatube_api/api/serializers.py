@@ -6,6 +6,7 @@ from posts.models import Comment, Group, Follow, Post
 
 User = get_user_model()
 
+
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         slug_field='username',
@@ -58,5 +59,7 @@ class FollowSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         following = data.get('following')
         if user == following:
-            raise serializers.ValidationError('Нельзя подписаться на самого себя!')
+            raise serializers.ValidationError(
+                'Нельзя подписаться на самого себя!'
+            )
         return data
