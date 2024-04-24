@@ -22,12 +22,10 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='posts'
     )
     group = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,
-        related_name='posts',
         blank=True,
         null=True,
     )
@@ -67,7 +65,7 @@ class Comment(models.Model):
         return f'''
             {self.author.username}:
             {self.text[:POST_TEXT_LENGTH]} to
-            {self.post.text[:POST_TEXT_LENGTH]}
+            {self.post}
         '''
 
 

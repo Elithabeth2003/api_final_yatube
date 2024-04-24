@@ -6,10 +6,10 @@ from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
 from api.permissions import IsOwnerOrReadOnly
 from api.serializers import (
-    PostSerializer,
     CommentSerializer,
+    FollowSerializer,
     GroupSerializer,
-    FollowSerializer
+    PostSerializer
 )
 from posts.models import Group, Comment, Post
 
@@ -42,7 +42,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [AllowAny]
+    permission_classes = (AllowAny,)
 
 
 class FollowViewSet(mixins.CreateModelMixin,
